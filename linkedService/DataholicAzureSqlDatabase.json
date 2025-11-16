@@ -1,0 +1,14 @@
+{
+	"name": "DataholicAzureSqlDatabase",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "dataholicserver.database.windows.net",
+			"database": "dataholicdb",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "SystemAssignedManagedIdentity"
+		}
+	}
+}
