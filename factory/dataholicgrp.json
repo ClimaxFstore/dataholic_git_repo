@@ -1,0 +1,9 @@
+{
+	"name": "dataholicgrp",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "5f3a0b1d-fef4-4899-8f75-3d58f87a190a",
+		"tenantId": "ccfad2a5-7b92-487f-b080-7b04d06ba7a5"
+	}
+}
