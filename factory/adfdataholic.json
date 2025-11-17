@@ -1,0 +1,9 @@
+{
+	"name": "adfdataholic",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8cc5d535-b73d-4be2-973e-01a4e751b7f2",
+		"tenantId": "ccfad2a5-7b92-487f-b080-7b04d06ba7a5"
+	}
+}
