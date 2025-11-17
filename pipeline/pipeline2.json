@@ -1,0 +1,17 @@
+{
+	"name": "pipeline2",
+	"properties": {
+		"parameters": {
+			"EndDate": {
+				"type": "string"
+			},
+			"MonthGroup": {
+				"type": "string"
+			},
+			"StartDate": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}

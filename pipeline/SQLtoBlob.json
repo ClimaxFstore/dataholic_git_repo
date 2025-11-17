@@ -1,0 +1,92 @@
+{
+	"name": "SQLtoBlob",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_BiMonth",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('BiMonthPeriods')",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_Sales_Data",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "SELECT * FROM SalesTransactions\nWHERE CAST(InvoiceDate AS DATE) >= '@{item().start}'\n\tAND CAST(InvoiceDate AS DATE) < '@{item().end}'",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "AzureSqlDatatb",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"BiMonthPeriods": {
+				"type": "Array",
+				"defaultValue": [
+					[
+						{
+							"start": "2010-01-01",
+							"end": "2010-03-01",
+							"code": "01-02"
+						},
+						{
+							"start": "2010-03-01",
+							"end": "2010-05-01",
+							"code": "03-04"
+						},
+						{
+							"start": "2010-05-01",
+							"end": "2010-07-01",
+							"code": "05-06"
+						},
+						{
+							"start": "2010-07-01",
+							"end": "2010-09-01",
+							"code": "07-08"
+						},
+						{
+							"start": "2010-09-01",
+							"end": "2010-11-01",
+							"code": "09-10"
+						},
+						{
+							"start": "2010-11-01",
+							"end": "2011-01-01",
+							"code": "11-12"
+						}
+					]
+				]
+			}
+		},
+		"annotations": []
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"name": "AzureSqlTableDataholic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDataholicLs",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"typeProperties": {
+			"tableName": "[SalesLT].[SalesTransactions]"
+		}
+	}
+}

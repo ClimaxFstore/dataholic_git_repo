@@ -1,0 +1,110 @@
+{
+	"name": "dataholic_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('BimonthlyRanges')",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_Bimonthly",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "SELECT * FROM SalesLT.SalesTransactions WHERE InvoiceDate >= '@{item().start}' AND InvoiceDate < '@{item().end}'",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "AzureSqlTableDataholic",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ParquetDataholic",
+									"type": "DatasetReference",
+									"parameters": {
+										"FolderPath": {
+											"value": "@concat('bimonthly/', item().label, '/')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"BimonthlyRanges": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"start": "2010-01-01",
+						"end": "2010-03-01",
+						"label": "Jan-Feb"
+					},
+					{
+						"start": "2010-03-01",
+						"end": "2010-05-01",
+						"label": "Mar-Apr"
+					},
+					{
+						"start": "2010-05-01",
+						"end": "2010-07-01",
+						"label": "May-Jun"
+					},
+					{
+						"start": "2010-07-01",
+						"end": "2010-09-01",
+						"label": "Jul-Aug"
+					},
+					{
+						"start": "2010-09-01",
+						"end": "2010-11-01",
+						"label": "Sep-Oct"
+					},
+					{
+						"start": "2010-11-01",
+						"end": "2025-01-01",
+						"label": "Nov-Dec"
+					}
+				]
+			}
+		},
+		"annotations": []
+	}
+}
