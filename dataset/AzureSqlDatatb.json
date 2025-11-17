@@ -1,0 +1,54 @@
+{
+	"name": "AzureSqlDatatb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDataholic",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Invoice",
+				"type": "varchar"
+			},
+			{
+				"name": "StockCode",
+				"type": "varchar"
+			},
+			{
+				"name": "Description",
+				"type": "varchar"
+			},
+			{
+				"name": "Quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "InvoiceDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "Price",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Customer",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Country",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": "SalesTransactions"
+		}
+	}
+}
